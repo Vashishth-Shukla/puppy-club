@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess My Breed</title>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500&family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header with Logo and Menu -->
+    <header>
+        <img src="https://i.imgur.com/QyXl0g5.png" style="width:175px; height:175px;" alt="Puppy Club Logo" class="logo">
+        <nav>
+            <ul>
+                <li><a href="#rules">Rules of the Game</a></li>
+                <li><a href="#about">About the Creators</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Welcome Section -->
+    <div class="section">
+    <div class="image-container-top">
+            <img src="https://i.imgur.com/1Xz5FRj.png" alt="Cute Jack Russell Terrier Puppy">
+        </div>
+
+    <section class="welcome">
+        <h1>Welcome to Guess My Breed!</h1>
+        <p>Get ready for an exciting dog breed guessing game...</p>
+    </section>
+    </div>
+
+    <!-- Game Section -->
+    <section class="game">
+        <h2>Select Your Clue</h2>
+        <button>Guess by Image</button>
+        <button>Guess by Description</button>
+
+        <!-- Hangman-style game interaction -->
+        <div class="hangman-game">
+            <p>Enter a letter to start guessing the breed!</p>
+            <input type="text" placeholder="Enter a letter">
+            <button>Submit</button>
+        </div>
+    </section>
+
+
+    <!-- Rules of the Game Section -->
+    <div id="rules" class="section">
+        <!-- Rules container -->
+        <div class="rules-container">
+        <h2>Rules of the Game</h2>
+        <ol>
+            <li>Select whether to guess the breed based on an image or a description.</li>
+            <li>Enter one letter at a time to guess the breed.</li>
+            <li>You can make up to 6 incorrect guesses before the game ends.</li>
+        </ol>
+            <p style="font-size:40px; font-family:'Baloo 2', cursive;"><i>Have fun and learn more about different dog breeds as you play!</i></p>
+
+    </div>
+    <div class="image-container">
+            <img src="https://www.shutterstock.com/image-photo/smart-jack-russell-terrier-puppy-600nw-2151794053.jpg" alt="Cute Jack Russell Terrier Puppy">
+        </div>
+    </div>
+
+    <!-- About the Creators Section -->
+    <section id="about" class="about-section">
+        <h2>About the Creators</h2>
+        <div class="team-container">
+            <!-- Team members (6 slots for images + description) -->
+            <div class="team-member">
+                <img src="path_to_member_image.jpg" alt="Team Member">
+                <p>Python Student 1 - Our dedicated coder with a passion for problem-solving.</p>
+            </div>
+            <div class="team-member">
+                <img src="path_to_member_image.jpg" alt="Team Member">
+                <p>Python Student 2 - Creativity and efficiency in one package!</p>
+            </div>
+            <!-- Add 4 more team members in the same way -->
+        </div>
+        <p class="about-text">We are a team of Python students, working together to create an exciting game for dog lovers and anyone who enjoys a challenge! Like a happy dog waiting eagerly for a walk, our game is full of energy and fun. With dedication and teamwork, we’re building something that brings smiles to everyone who plays!</p>
+    </section>
+</body>
+</html>
