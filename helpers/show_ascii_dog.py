@@ -1,9 +1,9 @@
-## \033[<style>;<foreground>;<background>m
+from helpers.colors import BOLD_GREEN, RESET
 
 
 def show_ascii_dog():
     print(
-        "\033[1;92;92m"
+        BOLD_GREEN
         + r"""
        /^-^\         /^-----^\
       / o o \        V  o o  V
@@ -14,7 +14,7 @@ def show_ascii_dog():
 (    /     |           |     \     )
  ===/___) ||           || (___\====
 """
-        + "\033[0m"
+        + RESET
     )
 
 

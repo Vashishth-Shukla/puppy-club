@@ -1,5 +1,5 @@
 from helpers.colors import PURPLE, RESET
-from helpers.gameplay_funcitons import ask_to_play_again, play_game
+from helpers.gameplay import ask_to_play_again, play_game
 
 
 def main():

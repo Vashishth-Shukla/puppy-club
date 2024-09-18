@@ -3,11 +3,27 @@ DOG_BREEDS = [
     "Bulldog",
     "American Staffordshire Terrier",
     "Irish Wolfhound",
-    "Bullterrier",
+    # "Bullterrier",
     "Jack Russell Terrier",
-    "Dachshund",
+    # "Dachshund",
     "Rottweiler",
     "Greyhound",
-    "Labrador Retriever",
+    # "Labrador Retriever",
     "Kangal Shepherd",
 ]
+
+
+### test
+def main():
+    from url_and_description import url_and_description
+
+    for breed in DOG_BREEDS:
+        _, summary = url_and_description(breed)
+        summary = summary.replace(breed, "'funny little puddle'")
+        print()
+        print(breed + ": ")
+        print(summary)
+
+
+if __name__ == "__main__":
+    main()

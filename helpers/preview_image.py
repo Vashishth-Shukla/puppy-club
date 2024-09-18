@@ -8,6 +8,10 @@ def preview_image(url):
     tmp = "tmpfile.jpg"
     urllib.request.urlretrieve(url, tmp)
     Image.open(tmp).show()
+
+
+def delete_image():
+    tmp = "tmpfile.jpg"
     os.remove(tmp)
 
 
