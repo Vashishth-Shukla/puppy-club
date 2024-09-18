@@ -1,6 +1,7 @@
 import random
 
 from preview_image import preview_image
+from show_ascii_dog import show_ascii_dog
 from url_and_description import url_and_description
 
 RED = "\033[91m"
@@ -11,7 +12,7 @@ PURPLE = "\033[95m"
 RESET = "\033[0m"
 
 
-dog_breeds = [
+DOG_BREEDS = [
     "Dobermann",
     "Bulldog",
     "American Staffordshire Terrier",
@@ -28,7 +29,7 @@ dog_breeds = [
 
 def choose_breed():
     """Randomly selects a breed from the list."""
-    return random.choice(dog_breeds)
+    return random.choice(DOG_BREEDS)
 
 
 def display_word(breed, guesses):
@@ -65,6 +66,8 @@ def play_game():
         f"\n{YELLOW}{'☆' * 10}{RESET} WELCOME TO GUESS MY BREED!{YELLOW} {'☆' * 10}{RESET}\n"
     )
     print(f"{YELLOW}Try to guess the dog breed!{RESET}")
+
+    show_ascii_dog()
 
     # put a photo of "word"
     img_url, summary = url_and_description(word)

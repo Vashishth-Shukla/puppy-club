@@ -2,7 +2,7 @@ import wikipedia
 
 
 def url_and_description(dog_breed):
-    summary = wikipedia.summary(dog_breed, sentences=2)
+    summary = wikipedia.summary(dog_breed, sentences=2, auto_suggest=False)
     page = wikipedia.page(dog_breed)
     image_url = page.images[2] if page.images else None
     return image_url, summary

@@ -1,91 +1,134 @@
 import random
-import sys
 
-from dog_breed import fetch_bread_character_wiki
+from helpers.preview_image import preview_image
+from helpers.show_ascii_dog import show_ascii_dog
+from helpers.url_and_description import url_and_description
+
+# \033[<style>;<foreground>;<background>m
+
+RED = "\033[91m"
+GREEN = "\033[92m"
+YELLOW = "\033[93m"
+BLUE = "\033[94m"
+PURPLE = "\033[95m"
+RESET = "\033[0m"
 
 DOG_BREEDS = [
-    "German Shepard",
-    "Labrador Retriever",
-    "Greyhound",
-    "Cocker Spaniels",
-    "Border Collie",
-    "Rottweiler",
-    "St.Bernard",
-    "Siberian Husky",
-    "Jack Russell Terrier",
     "Dobermann",
-    "Bull Terrier",
-    "American Staffordshire Terrier",
-    "French Bulldog",
-    "Kangal Shepherd Dog",
-    "Arabian Greyhound",
-    "Irish Wolfhound",
     "Bulldog",
+    "American Staffordshire Terrier",
+    "Irish Wolfhound",
+    "Bullterrier",
     "Jack Russell Terrier",
-    "Dalmatian dog",
-    "Cane Corso",
-    "Shiba Inu",
+    "Dachshund",
+    "Rottweiler",
+    "Greyhound",
+    "Labrador Retriever",
+    "Kangal Shepherd",
 ]
 
 
-def print_title(message):
-    print()
-    print()
-    print("#" * 80)
-    print("#" + " " * 78 + "#")
-    num_of_hash_before_and_after = (
-        (80 - len(message)) // 2 - 1 if len(message) < 80 else 0
+def choose_breed():
+    """Randomly selects a breed from the list."""
+    return random.choice(DOG_BREEDS)
+
+
+def display_word(breed, guesses):
+    """Displays the current state of the guessed breed, with spaces and underscores."""
+    return " ".join(
+        [
+            letter if letter.lower() in guesses or letter == " " else "_"
+            for letter in breed
+        ]
     )
-    print(
-        "#"
-        + " " * num_of_hash_before_and_after
-        + message
-        + " " * num_of_hash_before_and_after
-        + "#"
-    )
-    print("#" + " " * 78 + "#")
-    print("#" * 80)
-
-    print()
-    print()
-    print("Type EXIT to any input to exit the game!")
-    print()
 
 
-def exit_function():
-    print("Thank you for playing the game. \nSee you later, aligator!")
-    sys.exit()
-
-
-def check_if_exit(inp):
-    if inp == "EXIT":
-        exit_function()
-
-
-def print_rules():
-    print()
-    print("The rules are:")
-    print("Blah blah blah\n" * 3)
-    print()
-
-
-def opening_input():
+def get_user_guess(guessed_letters):
+    """Asks the user to type in a letter, making sure it's a valid single letter."""
     while True:
-        user_input = input("Press 0 to start the game or 1 to know the rules: ")
-        check_if_exit(user_input)
-        if user_input == "0":
-            return user_input
-        elif user_input == "1":
-            print_rules()
+        guess = input(f"{GREEN}Please enter a letter: {RESET}").lower()
+
+        if (not guess.isalpha() or len(guess) != 1) or guess == ".":
+            print(f"{RED}INVALID ENTRY!\nPlease enter a single letter.{RESET}")
+        elif guess in guessed_letters:
+            print(f"{PURPLE}You already guessed that letter.{RESET}")
         else:
-            print("Please enter 0 or 1 to continue or type EXIT to exit the game!")
+            return guess
+
+
+def print_title():
+    print(
+        f"\n{YELLOW}{'☆' * 10}{RESET} WELCOME TO GUESS MY BREED!{YELLOW} {'☆' * 10}{RESET}\n"
+    )
+    print(f"{YELLOW}Try to guess the dog breed!{RESET}")
+
+
+def play_game():
+    """Handles the gameplay loop for guessing the breed."""
+    word = choose_breed()
+    guessed_letters = set()
+    incorrect_guesses = 0
+    max_incorrect = 6
+
+    print_title()
+    show_ascii_dog()
+
+    # put a photo of "word"
+
+    img_url, summary = url_and_description(word)
+    preview_image(img_url)
+
+    summary = summary.replace(word, "'funny little puddle'")
+    print(summary)
+
+    while incorrect_guesses < max_incorrect:
+        # Displays the added letters in the word(breed) as it is being guessed
+        print(display_word(word, guessed_letters))
+        print(
+            f"\nYou have {PURPLE}{max_incorrect - incorrect_guesses}{RESET} guesses left"
+        )
+
+        guess = get_user_guess(guessed_letters)
+
+        if guess in word.lower():
+            guessed_letters.add(guess)
+            print(
+                f"{YELLOW}GREAT GUESS!{RESET}\n{guess.upper()} {YELLOW}is in the name of the breed.{RESET}"
+            )
+        else:
+            guessed_letters.add(guess)
+            incorrect_guesses += 1
+            print(
+                f"{RED}WRONG GUESS!{RESET}\n{guess.upper()} {RED}is not in the name of the breed.{RESET}"
+            )
+
+        if all(letter.lower() in guessed_letters or letter == " " for letter in word):
+            print(
+                f"\n{BLUE}{'☆' * 10}{RESET} CONGRATULATIONS! {BLUE}{'☆' * 10}{RESET}\n"
+                f"You guessed the breed: {BLUE}{word}{RESET}"
+            )
+            break
+    else:
+        print(
+            f"{RED}☹︎ SORRY, YOU RAN OUT OF GUESSES!{RESET}\nThe breed was: {YELLOW}{word}{RESET}"
+        )
+
+
+def ask_to_play_again():
+    """Asks the user if they want to play again."""
+    play_again = input(
+        f"\n{GREEN}Press Enter ⮐ to play again or type 'n' to quit: {RESET}"
+    ).lower()
+    return play_again != "n"
 
 
 def main():
-    print_title("Welcome to the PuppyClub")
-    opening_screen_selection = opening_input()
-    if opening_screen_selection == "0":
-        game_control()
+    """Main function to run the game and handle replay."""
+    while True:
+        play_game()
+        if not ask_to_play_again():
+            print(f"{PURPLE}Thanks for playing!{RESET}")
+            break
 
 
 if __name__ == "__main__":
