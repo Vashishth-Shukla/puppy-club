@@ -44,16 +44,19 @@ def play_game():
 def ask_to_play_again():
     """Asks the user if they want to play again."""
     play_again = input(
-        f"\n{GREEN}Press Enter ⮐ to play again or type 'n' to quit: {RESET}"
+        f"\n{GREEN}Press Enter ⮐ to play again or type 'q' to quit: {RESET}"
     ).lower()
-    return play_again != "n"
+    return play_again != "q"
 
 
 def _initialize_game(word):
     """Initializes the game by printing the title, showing ASCII dog art, and displaying breed image."""
     _print_title()
     show_ascii_dog()
-    input("Press any key to get the description of the breed...")
+    print()
+    print(PURPLE + "LET THE GAME BEGIN!" + RESET)
+    print()
+    input("Press Enter ⮐ to get the first clue...")
     print()
 
     img_url, summary = url_and_description(word)
@@ -62,7 +65,7 @@ def _initialize_game(word):
     print(YELLOW + "Description of the breed: " + RESET)
     print(textwrap.fill(summary, width=75))
     print()
-    input("Press any key to display the image of the dog...")
+    input("Press Enter ⮐ to get the second clue...")
     preview_image(img_url)
     print()
     print(YELLOW + "Now, guess the breed: " + RESET)
