@@ -61,7 +61,7 @@ def _initialize_game(word):
 
     img_url, summary = url_and_description(word)
 
-    summary = summary.replace(word, "'funny little puddle'")
+    summary = summary.replace(word, "'--funny little puddle--'")
     print(YELLOW + "Description of the breed: " + RESET)
     print(textwrap.fill(summary, width=75))
     print()
